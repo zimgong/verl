@@ -10,9 +10,7 @@ def extract_solution(solution_str):
         solution_str = solution_str.split("Assistant:", 1)[1]
     elif "<|im_start|>assistant" in solution_str:
         solution_str = solution_str.split("<|im_start|>assistant", 1)[1]
-    else:
-        return None
-    solution_str = solution_str.split('\n')[-1]
+    # solution_str = solution_str.split('\n')[-1]
 
     answer_pattern = r'<answer>(.*?)</answer>'
     match = re.finditer(answer_pattern, solution_str)
@@ -131,6 +129,8 @@ def compute_score(solution_str, ground_truth, format_score=0.1, score=1.):
     if do_print:
         print(f"--------------------------------")
         print(f"Puzzle: {puzzle_grid}")
+        print(f"Response string: {solution_str}")
+        print(f"Parsed response: {response_grid_str}")
         print(f"Response: {response_grid}")
 
     if response_grid_str is None or response_grid is None:
